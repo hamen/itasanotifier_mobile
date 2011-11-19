@@ -94,3 +94,21 @@
   	padding:1.2em 0;
   }
 
+  .rss {
+      background:#ffa;
+      border: 1px solid #ffd324;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      clear:both;
+      margin:15px 10px 10px;
+      width:90%;
+      padding:5px 5px 5px 5px;
+  }
+  .rss > h2 {
+	  color: blue;
+	  font-size: 1.3em;
+      text-align: center;
+  }
+  .rss > li {
+	  font-size: large;
+  }

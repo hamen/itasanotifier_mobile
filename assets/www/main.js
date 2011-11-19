@@ -124,4 +124,25 @@ function init() {
     // doesn't have a scroll button
     // document.addEventListener("touchmove", preventBehavior, false);
     document.addEventListener("deviceready", deviceInfo, true);
+	getLatest20Subs();
+}
+
+function getLatest20Subs() {
+	new Ajax.Request('http://feeds.feedburner.com/ITASA-Ultimi-Sottotitoli?option=com_rsssub&type=lastsub', {
+		method:'get',
+		onSuccess: function(transport) {
+			var response = transport.responseXML || "no response text";
+			//alert("Success! \n\n" + response);
+			//var temp= response.documentElement.getElementsByTagName("title")[1].childNodes[0].nodeValue;
+			var titles = response.documentElement.getElementsByTagName("title");
+			var links = response.documentElement.getElementsByTagName("link");
+			var list = $('latest20subs_list');
+			for (var i = 3; i < titles.length; i++) {
+				list.insert('<li>' + titles[i].childNodes[0].nodeValue + '</li>');
+			}
+			//alert('list is: \n' + list);
+			//$('latest20subs').innerHTML = list;
+		},
+		onFailure: function(){ alert('Something went wrong...'); }
+	});
 }
