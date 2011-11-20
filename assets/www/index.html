@@ -39,7 +39,7 @@
 	  saveUserData();
 	  })
 
-	  $('#recent').live('swiperight',function(event){
+	  $('.swipehome').live('swiperight',function(event){
       if (event.type == "swiperight") {
 	  $.mobile.changePage("#home", { transition: "slide", reverse: "true" } ,true);
       }
@@ -68,7 +68,7 @@
 	  </div>  
     </div>
 	<!-- MYITASA PAGE -->
-	<div data-role="page" id="myitasa">
+	<div data-role="page" id="myitasa" class='swipehome'>
 	  <div data-role="header">
 		<h1>MyItasa</h1>
 		<a href="#home" data-role="button" data-icon="arrow-l"
@@ -78,7 +78,7 @@
 	  </div>
 	</div>
 	<!-- RECENT SUBTITLES PAGE -->
-	<div data-role="page" id="recent">
+	<div data-role="page" id="recent" class='swipehome'>
 	  <div data-role="header">
 		<h1>Latest subs</h1>
 		<a href="#home" data-role="button" data-icon="arrow-l"
@@ -95,7 +95,7 @@
 	  </div>
 	</div>
 	<!-- SETTINGS PAGE -->
-	<div data-role="page" id="settings"> 
+	<div data-role="page" id="settings" class='swipehome'> 
 	  <div data-role="header">
 		<h1>Settings</h1>
 		<a href="#home" data-role="button" data-icon="arrow-l"
@@ -114,7 +114,7 @@
 	  </div>
 	</div>
 	<!-- ABOUT PAGE -->
-	<div data-role="page" id="about"> 
+	<div data-role="page" id="about" class='swipehome'> 
 	  <div data-role="header">
 		<h1>Author</h1>
 		<a href="#home" data-role="button" data-icon="arrow-l"
