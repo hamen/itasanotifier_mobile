@@ -145,7 +145,7 @@ function login() {
 function getFavoriteList() {
 	var authcode = login();
 	if(authcode !== "" && authcode != undefined) {
-		alert(authcode);
+		//alert(authcode);
 		$.ajax({
 			type: "GET",
 			url: "https://api.italiansubs.net/api/rest/myitasa/shows?",
@@ -156,7 +156,6 @@ function getFavoriteList() {
 				list.html("");
 				$(xml).find('show').each(function() {
 					var name = $(this).find('name').text();
-					alert(name);
 					list.append($(document.createElement('li')).html(name));
 					list.listview("destroy").listview();
 				});
