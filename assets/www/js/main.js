@@ -90,3 +90,25 @@ function loadUserSavedData() {
 		$('#password').val(password);
 	}
 }
+
+function getShowList() {
+	$.ajax({
+		type: "GET",
+		url: "https://api.italiansubs.net/api/rest/shows?apikey=632e846bc06f90a91dd9ff000b99ef87",
+		dataType: "xml",
+ 		success: function(xml) {
+			//alert(xml);
+			var list = $('#series_list');
+			list.html("");
+			$(xml).find('show').each(function() {
+				var name = $(this).find('name').text();				 
+				list.append($(document.createElement('li')).html(name));
+				list.listview("destroy").listview();
+			});
+			vibrate();
+		},
+		error: function(data) {
+		alert("error: " + data);
+		}
+	});
+}

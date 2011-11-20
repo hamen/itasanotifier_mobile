@@ -45,6 +45,10 @@
       }
       event.preventDefault();
       });
+
+	  $('#series_list_button').click(function(){
+	  getShowList();
+	  });
 	  
 	  document.addEventListener("deviceready", onDeviceReady, false);
 	  });
@@ -65,6 +69,7 @@
 		<p><a id="recentButton" href="#recent" data-role="button">Recent Subs</a></p>
 		<p><a href="#settings" data-role="button">Settings</a></p>
 		<p><a href="#about" data-role="button">About</a></p>
+		<p><a id="series_list_button" href="#series_list_page" data-role="button">Show List</a></p>
 	  </div>  
     </div>
 	<!-- MYITASA PAGE -->
@@ -130,6 +135,23 @@
 		  for <a href="http://dronix.org">DroniX.org</a>
 		  and <a href="http://italiansubs.net">ItalianSubs.net</a>
 		</p>
+	  </div>
+	</div>
+	<!-- TVSERIES LIST PAGE -->
+	<div data-role="page" id="series_list_page" class='swipehome'>
+	  <div data-role="header">
+		<h1>TV Series</h1>
+		<a href="#home" data-role="button" data-icon="arrow-l"
+		   data-rel="back">Back</a>
+		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" 
+		   data-direction="reverse">Home</a> 
+	  </div>
+	  <div data-role="content"> 
+		<ul data-role="listview" id="series_list">
+		</ul> 
+      </div>
+	  <div data-role="footer">
+		<a href="#home" data-role="button" data-icon="arrow-l">Back</a> 
 	  </div>
 	</div>
   </body>
