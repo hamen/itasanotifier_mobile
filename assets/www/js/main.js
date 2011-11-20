@@ -38,31 +38,28 @@ function close() {
     viewport.style.display = "none";
 }
 
-function init() {
-    document.addEventListener("deviceready", onDeviceReady, true);
-	document.addEventListener("menubutton", onMenuKeyDown, false);
-}
-
-function onDeviceReady() {
-	getLatestSubs();
-}
-
 function getLatestSubs() {
-	new Ajax.Request('http://feeds.feedburner.com/ITASA-Ultimi-Sottotitoli?option=com_rsssub&type=lastsub', {
-		method:'get',
-		onSuccess: function(transport) {
-			var response = transport.responseXML || "no response text";
-			var titles = response.documentElement.getElementsByTagName("title");
-			var links = response.documentElement.getElementsByTagName("link");
-			var list = $('latest20subs_list');
-			for (var i = 3; i < titles.length; i++) {
-				list.insert('<li>' + titles[i].childNodes[0].nodeValue + '</li>');
-			}
-			beep();
-		},
-		onFailure: function(){ alert('Something went wrong...'); }
+	$.ajax({
+		type: "GET",
+		url: "http://feeds.feedburner.com/ITASA-Ultimi-Sottotitoli?option=com_rsssub&type=lastsub",
+		dataType: "xml",
+		success: function(xml) {
+			var list = $('#latest20subs_list');
+			list.html("");
+			$(xml).find('title').each(function(){
+				var title = $(this).text();
+				if(title != "Ultimi Sottotitoli" && title != "LOGO ITASA") {
+					var link = $(this).next().text();
+					list.append($(document.createElement('li')).html(title));
+					//alert(title + " " + link);
+				}
+				list.listview("destroy").listview();
+			});
+		}
 	});
 }
+
+
 
 function getSub( ) {
 	
