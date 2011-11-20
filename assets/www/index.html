@@ -28,6 +28,8 @@
 	<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.0.min.js"></script>
 	<script type="text/javascript">
 	  $( function() {
+
+	  loadUserSavedData();
 	  
 	  $('#recentButton').click(function(){
 	  getLatestSubs();
@@ -35,10 +37,6 @@
 
 	  $('#save_button').click(function(){
 	  saveUserData();
-	  })
-
-	  $('#settings').click(function() {
-	  loadUserSavedData();
 	  })
 
 	  document.addEventListener("deviceready", onDeviceReady, false);
