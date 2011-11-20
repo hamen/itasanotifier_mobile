@@ -42,6 +42,7 @@
 	</script>  
   </head>
   <body>
+	<!-- HOME PAGE -->
 	<div data-role="page" id="home"> 
 	  <div data-role="header">
 		<h1>Itasa Notifier</h1>
@@ -49,9 +50,11 @@
 	  <div data-role="content">
 		<p><a href="#myitasa" data-role="button">MyItasa</a></p>
 		<p><a id="recentButton" href="#recent" data-role="button">Recent Subs</a></p>
+		<p><a href="#settings" data-role="button">Settings</a></p>
 		<p><a href="#about" data-role="button">About</a></p>
 	  </div>  
     </div>
+	<!-- MYITASA PAGE -->
 	<div data-role="page" id="myitasa">
 	  <div data-role="header">
 		<h1>MyItasa</h1>
@@ -61,7 +64,7 @@
 		   data-direction="reverse">Home</a> 
 	  </div>
 	</div>
-
+	<!-- RECENT SUBTITLES PAGE -->
 	<div data-role="page" id="recent">
 	  <div data-role="header">
 		<h1>Latest subs</h1>
@@ -78,7 +81,20 @@
 		<a href="#home" data-role="button" data-icon="arrow-l">Back</a> 
 	  </div>
 	</div>
-
+	<!-- SETTINGS PAGE -->
+	<div data-role="page" id="settings"> 
+	  <div data-role="header">
+		<h1>Author</h1>
+		<a href="#home" data-role="button" data-icon="arrow-l"
+		   data-rel="back">Back</a>
+		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" 
+		   data-direction="reverse">Home</a>
+	  </div>
+	  <div data-role="content">
+		<p>CONTENT</p>
+	  </div>
+	</div>
+	<!-- ABOUT PAGE -->
 	<div data-role="page" id="about"> 
 	  <div data-role="header">
 		<h1>Author</h1>
