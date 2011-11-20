@@ -40,6 +40,7 @@ function close() {
 
 function init() {
     document.addEventListener("deviceready", onDeviceReady, true);
+	document.addEventListener("menubutton", onMenuKeyDown, false);
 }
 
 function onDeviceReady() {
@@ -61,4 +62,12 @@ function getLatestSubs() {
 		},
 		onFailure: function(){ alert('Something went wrong...'); }
 	});
+}
+
+function getSub( ) {
+	
+}
+
+function onMenuKeyDown() {
+	alert('menu');
 }
