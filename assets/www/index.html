@@ -39,6 +39,13 @@
 	  saveUserData();
 	  })
 
+	  $('#recent').live('swiperight',function(event){
+      if (event.type == "swiperight") {
+	  $.mobile.changePage("#home", { transition: "slide", reverse: "true" } ,true);
+      }
+      event.preventDefault();
+      });
+	  
 	  document.addEventListener("deviceready", onDeviceReady, false);
 	  });
 	  
