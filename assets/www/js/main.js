@@ -55,6 +55,7 @@ function getLatestSubs() {
 				}
 				list.listview("destroy").listview();
 			});
+			vibrate();
 		}
 	});
 }
