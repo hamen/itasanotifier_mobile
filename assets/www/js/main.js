@@ -144,24 +144,30 @@ function login() {
 
 function getFavoriteList() {
 	var authcode = login();
-	//alert(authcode);
-	$.ajax({
-		type: "GET",
-		url: "https://api.italiansubs.net/api/rest/myitasa/shows?",
-		data: {authcode : authcode, apikey: "632e846bc06f90a91dd9ff000b99ef87"},
-		dataType: "xml",
- 		success: function(xml) {
-			var list = $('#favorite_list');
-			list.html("");
-			$(xml).find('show').each(function() {
-				var name = $(this).find('name').text();				 
-				list.append($(document.createElement('li')).html(name));
-				list.listview("destroy").listview();
-			});
-			vibrate();
-		},
-		error: function(data) {
-			alert("error: " + data);
-		}
-	});
+	if(authcode !== "" && authcode != undefined) {
+		alert(authcode);
+		$.ajax({
+			type: "GET",
+			url: "https://api.italiansubs.net/api/rest/myitasa/shows?",
+			data: {authcode : authcode, apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+			dataType: "xml",
+ 			success: function(xml) {
+				var list = $('#favorite_list');
+				list.html("");
+				$(xml).find('show').each(function() {
+					var name = $(this).find('name').text();
+					alert(name);
+					list.append($(document.createElement('li')).html(name));
+					list.listview("destroy").listview();
+				});
+				vibrate();
+			},
+			error: function(data) {
+				alert("error: " + data);
+			}
+		});
+	}
+	else {
+		alert('Authentication error\nDid you create an account in Settings?');
+	}
 }
