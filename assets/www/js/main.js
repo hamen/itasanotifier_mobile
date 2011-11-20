@@ -112,3 +112,29 @@ function getShowList() {
 		}
 	});
 }
+
+function login() {
+	var username = window.localStorage.getItem("username");
+	var password = window.localStorage.getItem("password");
+	if( username !== "" && password !== "") {
+		$.ajax({
+			type: "GET",
+			url: "https://api.italiansubs.net/api/rest/users/login?apikey=632e846bc06f90a91dd9ff000b99ef87",
+			data: {username : username, password: password},
+			dataType: "xml",
+ 			success: function(xml) {
+				$(xml).find('user').each(function(){
+					var authcode = $(this).find('authcode').text();
+					//alert(authcode);
+					return authcode;
+				});
+			},
+			error: function(data) {
+				alert("error: " + data);
+			}
+		});
+	}
+	else {
+		fail("No user found");
+	}
+}

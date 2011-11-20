@@ -39,6 +39,10 @@
 	  saveUserData();
 	  })
 
+	  $('#login_button').click(function(){
+	  login();
+	  })
+	  
 	  $('.swipehome').live('swiperight',function(event){
       if (event.type == "swiperight") {
 	  $.mobile.changePage("#home", { transition: "slide", reverse: "true" } ,true);
@@ -68,8 +72,8 @@
 		<p><a href="#myitasa" data-role="button">MyItasa</a></p>
 		<p><a id="recentButton" href="#recent" data-role="button">Recent Subs</a></p>
 		<p><a href="#settings" data-role="button">Settings</a></p>
-		<p><a href="#about" data-role="button">About</a></p>
 		<p><a id="series_list_button" href="#series_list_page" data-role="button">Show List</a></p>
+		<p><a href="#about" data-role="button">About</a></p>
 	  </div>  
     </div>
 	<!-- MYITASA PAGE -->
@@ -116,6 +120,7 @@
 		  <input type="password" id="password" name="password" value="" />
 		  <input type="submit" id="save_button" name="save_button" value="Save"  />
 		</div>
+		<p><a id="login_button" href="#" data-role="button">Login</a></p>
 	  </div>
 	</div>
 	<!-- ABOUT PAGE -->
