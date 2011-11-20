@@ -53,6 +53,10 @@
 	  $('#series_list_button').click(function(){
 	  getShowList();
 	  });
+
+	  $('#favorite_button').click(function(){
+	  getFavoriteList();
+	  });
 	  
 	  document.addEventListener("deviceready", onDeviceReady, false);
 	  });
@@ -85,6 +89,11 @@
 		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" 
 		   data-direction="reverse">Home</a> 
 	  </div>
+	  <div data-role="content">
+		<p><a id="favorite_button" href="#favorite" data-role="button">My favorite series</a></p>
+		<p><a id="latest_favorite_button" href="#latest_favorite" data-role="button">My latest subs</a></p>
+		<p><a id="next_favorite_button" href="#next_favorite" data-role="button">Next favorite subs</a></p>
+	  </div>  
 	</div>
 	<!-- RECENT SUBTITLES PAGE -->
 	<div data-role="page" id="recent" class='swipehome'>
@@ -157,6 +166,20 @@
       </div>
 	  <div data-role="footer">
 		<a href="#home" data-role="button" data-icon="arrow-l">Back</a> 
+	  </div>
+	</div>
+	<!-- FAVORITE PAGE -->
+	<div data-role="page" id="favorite" class='swipemyitasa'>
+	  <div data-role="header">
+		<h1>My favorite</h1>
+		<a href="#myitasa" data-role="button" data-icon="arrow-l" data-rel="back">Back</a>
+		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a> 
+	  </div>
+	  <div data-role="content">
+		<ul data-role="listview" id="favorite_list"></ul>
+	  </div>
+	  <div data-role="footer">
+		<a href="#myitasa" data-role="button" data-icon="arrow-l">Back</a> 
 	  </div>
 	</div>
   </body>

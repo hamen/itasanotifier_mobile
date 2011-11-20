@@ -96,6 +96,7 @@ function getShowList() {
 		type: "GET",
 		url: "https://api.italiansubs.net/api/rest/shows?apikey=632e846bc06f90a91dd9ff000b99ef87",
 		dataType: "xml",
+		async: false,
  		success: function(xml) {
 			//alert(xml);
 			var list = $('#series_list');
@@ -116,25 +117,51 @@ function getShowList() {
 function login() {
 	var username = window.localStorage.getItem("username");
 	var password = window.localStorage.getItem("password");
+	var authcode;
 	if( username !== "" && password !== "") {
 		$.ajax({
 			type: "GET",
 			url: "https://api.italiansubs.net/api/rest/users/login?apikey=632e846bc06f90a91dd9ff000b99ef87",
 			data: {username : username, password: password},
 			dataType: "xml",
+			async: false,
  			success: function(xml) {
 				$(xml).find('user').each(function(){
-					var authcode = $(this).find('authcode').text();
+					authcode = $(this).find('authcode').text();
 					//alert(authcode);
-					return authcode;
 				});
 			},
 			error: function(data) {
 				alert("error: " + data);
 			}
 		});
+		return authcode;
 	}
 	else {
 		fail("No user found");
 	}
+}
+
+function getFavoriteList() {
+	var authcode = login();
+	//alert(authcode);
+	$.ajax({
+		type: "GET",
+		url: "https://api.italiansubs.net/api/rest/myitasa/shows?",
+		data: {authcode : authcode, apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+		dataType: "xml",
+ 		success: function(xml) {
+			var list = $('#favorite_list');
+			list.html("");
+			$(xml).find('show').each(function() {
+				var name = $(this).find('name').text();				 
+				list.append($(document.createElement('li')).html(name));
+				list.listview("destroy").listview();
+			});
+			vibrate();
+		},
+		error: function(data) {
+			alert("error: " + data);
+		}
+	});
 }
