@@ -21,7 +21,7 @@ function beep() {
 }
 
 function vibrate() {
-    navigator.notification.vibrate(2000);
+    navigator.notification.vibrate(500);
 }
 
 var preventBehavior = function(e) {
@@ -68,4 +68,25 @@ function getSub( ) {
 
 function onMenuKeyDown() {
 	alert('menu');
+}
+
+function saveUserData() {
+	var username = $('#username').val();
+	var password = $('#password').val();
+	window.localStorage.setItem("username", username);
+	window.localStorage.setItem("password", password);
+
+	if (window.localStorage.getItem("username") == username &&
+		window.localStorage.getItem("password") == password) {
+		navigator.notification.alert("Saved");
+	}
+}
+
+function loadUserSavedData() {
+	var username = window.localStorage.getItem("username");
+	var password = window.localStorage.getItem("password");
+	if( username !== "" && password !== "") {
+		$('#username').val(username);
+		$('#password').val(password);
+	}
 }

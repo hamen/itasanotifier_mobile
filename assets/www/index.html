@@ -33,6 +33,14 @@
 	  getLatestSubs();
 	  });
 
+	  $('#save_button').click(function(){
+	  saveUserData();
+	  })
+
+	  $('#settings').click(function() {
+	  loadUserSavedData();
+	  })
+
 	  document.addEventListener("deviceready", onDeviceReady, false);
 	  });
 	  
@@ -84,14 +92,20 @@
 	<!-- SETTINGS PAGE -->
 	<div data-role="page" id="settings"> 
 	  <div data-role="header">
-		<h1>Author</h1>
+		<h1>Settings</h1>
 		<a href="#home" data-role="button" data-icon="arrow-l"
 		   data-rel="back">Back</a>
 		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" 
 		   data-direction="reverse">Home</a>
 	  </div>
 	  <div data-role="content">
-		<p>CONTENT</p>
+		<div data-role="fieldcontain">
+		  <label for="text">Username:</label>
+		  <input type="text" id="username" name="username" value=""  />
+		  <label for="text">Password:</label>
+		  <input type="password" id="password" name="password" value="" />
+		  <input type="submit" id="save_button" name="save_button" value="Save"  />
+		</div>
 	  </div>
 	</div>
 	<!-- ABOUT PAGE -->
