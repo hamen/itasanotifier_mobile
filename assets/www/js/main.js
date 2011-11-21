@@ -151,7 +151,7 @@ function getShowList() {
 	});
 }
 
-function login() {
+function login(show_alert) {
 	var username = window.localStorage.getItem("username");
 	var password = window.localStorage.getItem("password");
 	var authcode;
@@ -165,7 +165,9 @@ function login() {
  			success: function(xml) {
 				$(xml).find('user').each(function(){
 					authcode = $(this).find('authcode').text();
-					//alert(authcode);
+					if(authcode !== "" && authcode !== undefined && show_alert) {
+						alert("Login effettuato con successo");
+					}
 				});
 			},
 			error: function(data) {
@@ -180,8 +182,8 @@ function login() {
 }
 
 function getFavoriteList() {
-	var authcode = login();
-	if(authcode !== "" && authcode != undefined) {
+	var authcode = login(false);
+	if(authcode !== "" && authcode !== undefined) {
 		//alert(authcode);
 		$.ajax({
 			type: "GET",
