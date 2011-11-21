@@ -18,6 +18,7 @@
 
 function onDeviceReady() {
 	document.addEventListener("menubutton", onMenuKeyDown, false);
+	document.addEventListener("backbutton", onBackKeyDown, true);
 	
 	$('#recentButton').click(function(){
 		getLatestSubs();
@@ -120,6 +121,9 @@ function onMenuKeyDown() {
 	alert('menu');
 }
 
+function onBackKeyDown() {
+	//do nothing for now
+}
 function saveUserData() {
 	var username = $('#username').val();
 	var password = $('#password').val();
