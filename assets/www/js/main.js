@@ -53,6 +53,16 @@ function onDeviceReady() {
 		getFavoriteList();
 	});
 	
+	$('#vibrate_checkbox').click(function(){
+		if(this.checked) {
+			window.localStorage.setItem("vibrate_checkbox", true);
+		}
+		else {
+			window.localStorage.setItem("vibrate_checkbox", false);
+		}
+	});
+}
+
 function beep() {
     navigator.notification.beep(1);
 }
@@ -92,12 +102,11 @@ function getLatestSubs() {
 				}
 				list.listview("destroy").listview();
 			});
-			vibrate();
+			if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+				vibrate();
 		}
 	});
 }
-
-
 
 function getSub( ) {
 	
@@ -126,6 +135,8 @@ function loadUserSavedData() {
 		$('#username').val(username);
 		$('#password').val(password);
 	}
+
+	$('#vibrate_checkbox').prop("checked", window.localStorage.getItem("vibrate_checkbox"));
 }
 
 function getShowList() {
@@ -143,10 +154,11 @@ function getShowList() {
 				list.append($(document.createElement('li')).html(name));
 				list.listview("destroy").listview();
 			});
-			vibrate();
+			if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+				vibrate();
 		},
 		error: function(data) {
-		alert("error: " + data);
+			alert("error: " + data);
 		}
 	});
 }
@@ -198,7 +210,8 @@ function getFavoriteList() {
 					list.append($(document.createElement('li')).html(name));
 					list.listview("destroy").listview();
 				});
-				vibrate();
+				if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+					vibrate();
 			},
 			error: function(data) {
 				alert("error: " + data);
