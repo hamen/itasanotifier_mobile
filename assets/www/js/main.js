@@ -78,7 +78,7 @@ function saveUserData() {
 
 	if (window.localStorage.getItem("username") == username &&
 		window.localStorage.getItem("password") == password) {
-		navigator.notification.alert("Saved");
+		navigator.notification.alert("Dati salvati correttamente!");
 	}
 }
 
@@ -167,6 +167,6 @@ function getFavoriteList() {
 		});
 	}
 	else {
-		alert('Authentication error\nDid you create an account in Settings?');
+		alert('Errore di autenticazione\nAssicurati di aver creato un account\ne di aver effettuato il login in Impostazioni');
 	}
 }

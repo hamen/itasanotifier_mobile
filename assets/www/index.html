@@ -81,10 +81,10 @@
 	  </div>
 	  <div data-role="content">
 		<p><a href="#myitasa" data-role="button">MyItasa</a></p>
-		<p><a id="recentButton" href="#recent" data-role="button">Recent Subs</a></p>
-		<p><a href="#settings" data-role="button">Settings</a></p>
+		<p><a id="recentButton" href="#recent" data-role="button">Ultimi sottotitoli</a></p>
+		<p><a href="#settings" data-role="button">Impostazioni</a></p>
 		<!--<p><a id="series_list_button" href="#series_list_page" data-role="button">Show List</a></p> -->
-		<p><a href="#about" data-role="button">About</a></p>
+		<p><a href="#about" data-role="button">Informazioni</a></p>
 	  </div>  
     </div>
 	<!-- MYITASA PAGE -->
@@ -97,15 +97,17 @@
 		   data-direction="reverse">Home</a> 
 	  </div>
 	  <div data-role="content">
-		<p><a id="favorite_button" href="#favorite" data-role="button">My favorite series</a></p>
-		<p><a id="latest_favorite_button" href="#latest_favorite" data-role="button">My latest subs</a></p>
-		<p><a id="next_favorite_button" href="#next_favorite" data-role="button">Next favorite subs</a></p>
+		<p><a id="favorite_button" href="#favorite" data-role="button">Le mie serie preferite</a></p>
+		<p><a id="latest_favorite_button" href="#latest_favorite" data-role="button">I miei ultimi sub</a></p>
+		<p><a id="next_favorite_button" href="#next_favorite" data-role="button">Prossimi episodi</a></p>
+		<p><a id="forum_button" href="http://www.italiansubs.net/forum/" data-role="button">Forum</a></p>
+		<p><a id="blog_button" href="http://blog.italiansubs.net/" data-role="button">Blog</a></p>
 	  </div>  
 	</div>
 	<!-- RECENT SUBTITLES PAGE -->
 	<div data-role="page" id="recent" class='swipehome'>
 	  <div data-role="header">
-		<h1>Latest subs</h1>
+		<h1>Ultimi sottotitoli</h1>
 		<a href="#home" data-role="button" data-icon="arrow-l"
 		   data-rel="back">Back</a>
 		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" 
@@ -119,7 +121,7 @@
 	<!-- SETTINGS PAGE -->
 	<div data-role="page" id="settings" class='swipehome'> 
 	  <div data-role="header">
-		<h1>Settings</h1>
+		<h1>Impostazioni</h1>
 		<a href="#home" data-role="button" data-icon="arrow-l"
 		   data-rel="back">Back</a>
 		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" 
@@ -127,11 +129,15 @@
 	  </div>
 	  <div data-role="content">
 		<div data-role="fieldcontain">
+		  <p>
 		  <label for="text">Username:</label>
 		  <input type="text" id="username" name="username" value=""  />
+		  </p>
+		  <p>
 		  <label for="text">Password:</label>
 		  <input type="password" id="password" name="password" value="" />
-		  <input type="submit" id="save_button" name="save_button" value="Save"  />
+		  </p>
+		  <input type="submit" id="save_button" name="save_button" value="Salva"  />
 		</div>
 		<p><a id="login_button" href="#" data-role="button">Login</a></p>
 	  </div>
@@ -139,19 +145,19 @@
 	<!-- ABOUT PAGE -->
 	<div data-role="page" id="about" class='swipehome'> 
 	  <div data-role="header">
-		<h1>Author</h1>
+		<h1>Autore</h1>
 		<a href="#home" data-role="button" data-icon="arrow-l"
 		   data-rel="back">Back</a>
 		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" 
 		   data-direction="reverse">Home</a>
 	  </div>
 	  <div data-role="content">
-		<p> Developed by 
+		<p>Sviluppata da 
 		  <a href="mailto:imorgillo@gmail.com">Ivan Morgillo</a>
 		</p>
 		<p>
-		  for <a href="http://dronix.org">DroniX.org</a>
-		  and <a href="http://italiansubs.net">ItalianSubs.net</a>
+		  per <a href="http://dronix.org">DroniX.org</a>
+		  e <a href="http://italiansubs.net">ItalianSubs.net</a>
 		</p>
 	  </div>
 	</div>
@@ -172,7 +178,7 @@
 	<!-- FAVORITE PAGE -->
 	<div data-role="page" id="favorite" class='swipemyitasa'>
 	  <div data-role="header">
-		<h1>My favorite</h1>
+		<h1>Le mie serie preferite</h1>
 		<a href="#myitasa" data-role="button" data-icon="arrow-l" data-rel="back">Back</a>
 		<a href="#home" class="ui-btn-right" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a> 
 	  </div>
