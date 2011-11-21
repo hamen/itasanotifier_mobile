@@ -63,6 +63,10 @@ function onDeviceReady() {
 	});
 }
 
+$(document).bind("mobileinit", function(){
+    $.mobile.defaultPageTransition = 'none';
+});
+
 function beep() {
     navigator.notification.beep(1);
 }
