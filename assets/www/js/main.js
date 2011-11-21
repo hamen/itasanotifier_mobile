@@ -118,7 +118,7 @@ function getSub( ) {
 }
 
 function onMenuKeyDown() {
-	alert('menu');
+	$.mobile.changePage("#settings");
 }
 
 function onBackKeyDown() {
