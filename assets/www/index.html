@@ -30,47 +30,8 @@
 	  $( function() {
 
 	  loadUserSavedData();
-	  
-	  $('#recentButton').click(function(){
-	  getLatestSubs();
-	  });
-
-	  $('#save_button').click(function(){
-	  saveUserData();
-	  })
-
-	  $('#login_button').click(function(){
-	  login();
-	  })
-	  
-	  $('.swipehome').live('swiperight',function(event){
-      if (event.type == "swiperight") {
-	  $.mobile.changePage("#home", { transition: "slide", reverse: "true" } ,true);
-      }
-      event.preventDefault();
-      });
-
-	  $('.swipemyitasa').live('swiperight',function(event){
-      if (event.type == "swiperight") {
-	  $.mobile.changePage("#myitasa", { transition: "slide", reverse: "true" } ,true);
-      }
-      event.preventDefault();
-      });
-	  
-	  $('#series_list_button').click(function(){
-	  getShowList();
-	  });
-
-	  $('#favorite_button').click(function(){
-	  getFavoriteList();
-	  });
-	  
 	  document.addEventListener("deviceready", onDeviceReady, false);
 	  });
-	  
-	  function onDeviceReady() {
-	  document.addEventListener("menubutton", onMenuKeyDown, false);
-	  }
 	</script>  
   </head>
   <body>

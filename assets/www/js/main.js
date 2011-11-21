@@ -16,6 +16,43 @@
  * 
  */
 
+function onDeviceReady() {
+	document.addEventListener("menubutton", onMenuKeyDown, false);
+	
+	$('#recentButton').click(function(){
+		getLatestSubs();
+	});
+
+	$('#save_button').click(function(){
+		saveUserData();
+	});
+
+	$('#login_button').click(function(){
+		login(true);
+	});
+	
+	$('.swipehome').live('swiperight',function(event){
+		if (event.type == "swiperight") {
+			$.mobile.changePage("#home", { transition: "slide", reverse: "true" } ,true);
+		}
+		event.preventDefault();
+    });
+
+	$('.swipemyitasa').live('swiperight',function(event){
+		if (event.type == "swiperight") {
+			$.mobile.changePage("#myitasa", { transition: "slide", reverse: "true" } ,true);
+		}
+		event.preventDefault();
+    });
+	
+	$('#series_list_button').click(function(){
+		getShowList();
+	});
+
+	$('#favorite_button').click(function(){
+		getFavoriteList();
+	});
+	
 function beep() {
     navigator.notification.beep(1);
 }
