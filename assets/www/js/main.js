@@ -95,13 +95,13 @@ function close() {
 }
 
 function getLatestSubs() {
+	var list = $('#latest20subs_list');
+	list.html("");
 	$.ajax({
 		type: "GET",
 		url: "http://feeds.feedburner.com/ITASA-Ultimi-Sottotitoli?option=com_rsssub&type=lastsub",
 		dataType: "xml",
 		success: function(xml) {
-			var list = $('#latest20subs_list');
-			list.html("");
 			$(xml).find('title').each(function(){
 				var title = $(this).text();
 				if(title != "Ultimi Sottotitoli" && title != "LOGO ITASA") {
