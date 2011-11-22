@@ -24,6 +24,10 @@ function onDeviceReady() {
 		getLatestSubs();
 	});
 
+	$('#refresh_button').click(function(){
+		getLatestSubs();
+	});
+	
 	$('#save_button').click(function(){
 		saveUserData();
 	});
