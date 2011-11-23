@@ -71,6 +71,10 @@ function onDeviceReady() {
 	$('#next_refresh_button').click(function(){
 		getNextFavoriteSubs();
 	});
+
+	$('#exit_button').click(function(){
+		navigator.app.exitApp();
+	});
 	
 	$('#vibrate_checkbox').click(function(){
 		if(this.checked) {
