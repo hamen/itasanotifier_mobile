@@ -233,6 +233,7 @@ function getFavoriteList() {
 				alert("error: " + data);
 			}
 		});
+		$.mobile.changePage("#favorite");
 	}
 	else {
 		alert('Errore di autenticazione\nAssicurati di aver creato un account\ne di aver effettuato il login in Impostazioni');
@@ -264,6 +265,7 @@ function getLatestFavoriteSubs() {
 				alert("error: " + data);
 			}
 		});
+		$.mobile.changePage("#latest_favorite");
 	}
 	else {
 		alert('Errore di autenticazione\nAssicurati di aver creato un account\ne di aver effettuato il login in Impostazioni');
@@ -295,6 +297,7 @@ function getNextFavoriteSubs() {
 				alert("error: " + data);
 			}
 		});
+		$.mobile.changePage("#next_favorite");
 	}
 	else {
 		alert('Errore di autenticazione\nAssicurati di aver creato un account\ne di aver effettuato il login in Impostazioni');
