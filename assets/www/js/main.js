@@ -57,6 +57,13 @@ function onDeviceReady() {
 	$('#favorite_button').click(function(){
 		getFavoriteList();
 	});
+
+	$('#latest_favorite_button').click(function(){
+		getLatestFavoriteSubs();
+	});
+	$('#latest_refresh_button').click(function(){
+		getLatestFavoriteSubs();
+	});
 	
 	$('#vibrate_checkbox').click(function(){
 		if(this.checked) {
@@ -220,6 +227,37 @@ function getFavoriteList() {
 				$(xml).find('show').each(function() {
 					var name = $(this).find('name').text();
 					list.append($(document.createElement('li')).html(name));
+					list.listview("destroy").listview();
+				});
+				if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+					vibrate();
+			},
+			error: function(data) {
+				alert("error: " + data);
+			}
+		});
+	}
+	else {
+		alert('Errore di autenticazione\nAssicurati di aver creato un account\ne di aver effettuato il login in Impostazioni');
+	}
+}
+
+function getLatestFavoriteSubs() {
+	var authcode = login(false);
+	if(authcode !== "" && authcode !== undefined) {
+		//alert(authcode);
+		$.ajax({
+			type: "GET",
+			url: "https://api.italiansubs.net/api/rest/myitasa/lastsubtitles?page=<PAGE=1>?",
+			data: {authcode : authcode, apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+			dataType: "xml",
+ 			success: function(xml) {
+				var list = $('#latest_favorite_list');
+				list.html("");
+				$(xml).find('subtitle').each(function() {
+					var name = $(this).find('name').text();
+					var version = $(this).find('version').text();
+					list.append($(document.createElement('li')).html(name + " " + version));
 					list.listview("destroy").listview();
 				});
 				if(window.localStorage.getItem("vibrate_checkbox") === 'true')
