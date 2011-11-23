@@ -140,7 +140,7 @@ function onMenuKeyDown() {
 }
 
 function onBackKeyDown() {
-	//do nothing for now
+	window.history.back();
 }
 function saveUserData() {
 	var username = $('#username').val();
