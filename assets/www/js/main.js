@@ -166,6 +166,8 @@ function loadUserSavedData() {
 }
 
 function getShowList() {
+	var list = $('#series_list');
+	list.html("");
 	$.ajax({
 		type: "GET",
 		url: "https://api.italiansubs.net/api/rest/shows?apikey=632e846bc06f90a91dd9ff000b99ef87",
@@ -173,8 +175,6 @@ function getShowList() {
 		async: false,
  		success: function(xml) {
 			//alert(xml);
-			var list = $('#series_list');
-			list.html("");
 			$(xml).find('show').each(function() {
 				var name = $(this).find('name').text();				 
 				list.append($(document.createElement('li')).html(name));
@@ -220,6 +220,8 @@ function login(show_alert) {
 }
 
 function getFavoriteList() {
+	var list = $('#favorite_list');
+	list.html("");
 	var authcode = login(false);
 	if(authcode !== "" && authcode !== undefined) {
 		//alert(authcode);
@@ -229,8 +231,6 @@ function getFavoriteList() {
 			data: {authcode : authcode, apikey: "632e846bc06f90a91dd9ff000b99ef87"},
 			dataType: "xml",
  			success: function(xml) {
-				var list = $('#favorite_list');
-				list.html("");
 				$(xml).find('show').each(function() {
 					var name = $(this).find('name').text();
 					list.append($(document.createElement('li')).html(name));
@@ -250,6 +250,8 @@ function getFavoriteList() {
 }
 
 function getLatestFavoriteSubs() {
+	var list = $('#latest_favorite_list');
+	list.html("");
 	var authcode = login(false);
 	if(authcode !== "" && authcode !== undefined) {
 		//alert(authcode);
@@ -259,8 +261,6 @@ function getLatestFavoriteSubs() {
 			data: {authcode : authcode, apikey: "632e846bc06f90a91dd9ff000b99ef87"},
 			dataType: "xml",
  			success: function(xml) {
-				var list = $('#latest_favorite_list');
-				list.html("");
 				$(xml).find('subtitle').each(function() {
 					var name = $(this).find('name').text();
 					var version = $(this).find('version').text();
@@ -281,6 +281,8 @@ function getLatestFavoriteSubs() {
 }
 
 function getNextFavoriteSubs() {
+	var list = $('#next_favorite_list');
+	list.html("");
 	var authcode = login(false);
 	if(authcode !== "" && authcode !== undefined) {
 		//alert(authcode);
@@ -290,8 +292,6 @@ function getNextFavoriteSubs() {
 			data: {authcode : authcode, apikey: "632e846bc06f90a91dd9ff000b99ef87"},
 			dataType: "xml",
  			success: function(xml) {
-				var list = $('#next_favorite_list');
-				list.html("");
 				$(xml).find('episode').each(function() {
 					var name = $(this).find('show_name').text();
 					var date = $(this).find('date').text();
