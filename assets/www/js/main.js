@@ -36,20 +36,6 @@ function onDeviceReady() {
 		login(true);
 	});
 	
-	// $('.swipehome').live('swiperight',function(event){
-	// 	if (event.type == "swiperight") {
-	// 		$.mobile.changePage("#home", { transition: "slide", reverse: "true" } ,true);
-	// 	}
-	// 	event.preventDefault();
-    // });
-
-	// $('.swipemyitasa').live('swiperight',function(event){
-	// 	if (event.type == "swiperight") {
-	// 		$.mobile.changePage("#myitasa", { transition: "slide", reverse: "true" } ,true);
-	// 	}
-	// 	event.preventDefault();
-    // });
-	
 	$('#series_list_button').click(function(){
 		getShowList();
 	});
