@@ -104,39 +104,6 @@ function fail(msg) {
     alert(msg);
 }
 
-function close() {
-    var viewport = document.getElementById('viewport');
-    viewport.style.position = "relative";
-    viewport.style.display = "none";
-}
-
-function getLatestSubs() {
-	var list = $('#latest20subs_list');
-	list.html("");
-	$.ajax({
-		type: "GET",
-		url: "http://feeds.feedburner.com/ITASA-Ultimi-Sottotitoli?option=com_rsssub&type=lastsub",
-		dataType: "xml",
-		success: function(xml) {
-			$(xml).find('title').each(function(){
-				var title = $(this).text();
-				if(title != "Ultimi Sottotitoli" && title != "LOGO ITASA") {
-					var link = $(this).next().text();
-					list.append($(document.createElement('li')).html(title));
-					//alert(title + " " + link);
-				}
-				list.listview("destroy").listview();
-			});
-			if(window.localStorage.getItem("vibrate_checkbox") === 'true')
-				vibrate();
-		}
-	});
-}
-
-function getSub( ) {
-	
-}
-
 function onMenuKeyDown() {
 	$.mobile.changePage("#settings");
 }
