@@ -70,6 +70,14 @@ function onDeviceReady() {
 			window.localStorage.setItem("vibrate_checkbox", false);
 		}
 	});
+
+	$('#newsButton').click(function(){
+		getNews();
+	});
+
+	$('#news_refresh_button').click(function(){
+		getNews();
+	});
 }
 
 $(document).bind("mobileinit", function(){
@@ -302,4 +310,29 @@ function getNextFavoriteSubs() {
 	else {
 		alert('Errore di autenticazione\nAssicurati di aver creato un account\ne di aver effettuato il login in Impostazioni');
 	}
+}
+
+function getNews() {
+//	https://api.italiansubs.net/api/rest/news?page=1&apikey=632e846bc06f90a91dd9ff000b99ef87
+	var list = $('#news_list');
+	list.html("");
+	$.ajax({
+		type: "GET",
+		url: "https://api.italiansubs.net/api/rest/news?page=1",
+		dataType: "xml",
+		data: {apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+		success: function(xml) {
+			$(xml).find('news > news').each(function() {
+				var name = $(this).find('show_name').text();
+				var image = $(this).find('image').text();
+				list.append($(document.createElement('li')).html(name + " " + image));
+				list.listview("destroy").listview();
+			});
+			if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+				vibrate();
+		},
+		error: function() {
+			alert('Something was wrong');
+		}
+	});
 }
