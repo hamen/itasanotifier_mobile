@@ -78,6 +78,10 @@ function onDeviceReady() {
 	$('#news_refresh_button').click(function(){
 		getNews();
 	});
+
+	$('.thumb').live("click", function(){
+		showNewsDialog($(this).attr('show_id'));
+	});
 }
 
 $(document).bind("mobileinit", function(){
@@ -313,8 +317,8 @@ function getNextFavoriteSubs() {
 }
 
 function getNews() {
-//	https://api.italiansubs.net/api/rest/news?page=1&apikey=632e846bc06f90a91dd9ff000b99ef87
 	var news_img_url = [];
+	$('#new_table').empty();
 	$.ajax({
 		type: "GET",
 		url: "https://api.italiansubs.net/api/rest/news?page=1",
@@ -327,8 +331,8 @@ function getNews() {
 				var id = $(this).find('id').text();
 				news_img_url.push({ 'image_url' : image, 'id' : id });
 			});
-			// if(window.localStorage.getItem("vibrate_checkbox") === 'true')
-			// 	vibrate();
+			if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+				vibrate();
 		},
 		error: function() {
 			alert('Something was wrong');
@@ -336,7 +340,49 @@ function getNews() {
 	});
 	$('#news_table tr').each(function(i) {
 		$(this).find('td:first span')
-			.html('<a href="http://www.italiansubs.net/index.php?option=com_news&Itemid=13&id=' + news_img_url[i].id
-				  +'>"<img src="' + news_img_url[i].image_url + '" /></a>');
+			.html('<a class="thumb" show_id="' + news_img_url[i].id +'" data-rel="dialog" data-transition="none" href="#show_dialog_page"><img src="'+ news_img_url[i].image_url + '" /></a>');
 	});
 }
+
+function getNewsByID(id) {
+	var show;
+	$.ajax({
+		type: "GET",
+		url: "https://api.italiansubs.net/api/rest/news/" + id,
+		dataType: "xml",
+		data: {apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+		async: false,
+		success: function(xml) {
+			$(xml).find('news').each(function() {
+				var show_name = $(this).find('show_name').text();
+				var info = $(this).find('info').text();
+				var image_url = $(this).find('image').text();
+				var episode = $(this).find('episode').text();
+				show = {
+					'show_name' : show_name,
+					'info' : info,
+					'image_url' : image_url,
+					'episode' : episode
+				};
+			});
+			// if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+			// 	vibrate();
+		},
+		error: function() {
+			alert('Something was wrong');
+		}
+	});
+	return show;
+}
+
+function showNewsDialog(id) {
+	var show = getNewsByID(id);
+	var page = $("#show_dialog_page");
+	var content = page.find('.dialog_content');
+	page.find('h1').html(show.show_name);
+	content.empty();
+	content.append('<div style="text-align: center"><img src="' + show.image_url + '"/></div>');
+	content.append('<h3>Episode ' + show.episode + '</h3>');
+	content.append('<p>' + show.info + '</p>');
+}
+
