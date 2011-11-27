@@ -70,6 +70,18 @@ function onDeviceReady() {
 			window.localStorage.setItem("vibrate_checkbox", false);
 		}
 	});
+
+	$('#newsButton').click(function(){
+		getNews();
+	});
+
+	$('#news_refresh_button').click(function(){
+		getNews();
+	});
+
+	$('.thumb').live("click", function(){
+		showNewsDialog($(this).attr('show_id'));
+	});
 }
 
 $(document).bind("mobileinit", function(){
@@ -90,39 +102,6 @@ var preventBehavior = function(e) {
 
 function fail(msg) {
     alert(msg);
-}
-
-function close() {
-    var viewport = document.getElementById('viewport');
-    viewport.style.position = "relative";
-    viewport.style.display = "none";
-}
-
-function getLatestSubs() {
-	var list = $('#latest20subs_list');
-	list.html("");
-	$.ajax({
-		type: "GET",
-		url: "http://feeds.feedburner.com/ITASA-Ultimi-Sottotitoli?option=com_rsssub&type=lastsub",
-		dataType: "xml",
-		success: function(xml) {
-			$(xml).find('title').each(function(){
-				var title = $(this).text();
-				if(title != "Ultimi Sottotitoli" && title != "LOGO ITASA") {
-					var link = $(this).next().text();
-					list.append($(document.createElement('li')).html(title));
-					//alert(title + " " + link);
-				}
-				list.listview("destroy").listview();
-			});
-			if(window.localStorage.getItem("vibrate_checkbox") === 'true')
-				vibrate();
-		}
-	});
-}
-
-function getSub( ) {
-	
 }
 
 function onMenuKeyDown() {
@@ -303,3 +282,74 @@ function getNextFavoriteSubs() {
 		alert('Errore di autenticazione\nAssicurati di aver creato un account\ne di aver effettuato il login in Impostazioni');
 	}
 }
+
+function getNews() {
+	var news_img_url = [];
+	$('#new_table').empty();
+	$.ajax({
+		type: "GET",
+		url: "https://api.italiansubs.net/api/rest/news?page=1",
+		dataType: "xml",
+		data: {apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+		async: false,
+		success: function(xml) {
+			$(xml).find('news > news').each(function() {
+				var image = $(this).find('image').text();
+				var id = $(this).find('id').text();
+				news_img_url.push({ 'image_url' : image, 'id' : id });
+			});
+			if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+				vibrate();
+		},
+		error: function() {
+			alert('Something was wrong');
+		}
+	});
+	$('#news_table tr').each(function(i) {
+		$(this).find('td:first span')
+			.html('<a class="thumb" show_id="' + news_img_url[i].id +'" data-rel="dialog" data-transition="none" href="#show_dialog_page"><img src="'+ news_img_url[i].image_url + '" /></a>');
+	});
+}
+
+function getNewsByID(id) {
+	var show;
+	$.ajax({
+		type: "GET",
+		url: "https://api.italiansubs.net/api/rest/news/" + id,
+		dataType: "xml",
+		data: {apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+		async: false,
+		success: function(xml) {
+			$(xml).find('news').each(function() {
+				var show_name = $(this).find('show_name').text();
+				var info = $(this).find('info').text();
+				var image_url = $(this).find('image').text();
+				var episode = $(this).find('episode').text();
+				show = {
+					'show_name' : show_name,
+					'info' : info,
+					'image_url' : image_url,
+					'episode' : episode
+				};
+			});
+			// if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+			// 	vibrate();
+		},
+		error: function() {
+			alert('Something was wrong');
+		}
+	});
+	return show;
+}
+
+function showNewsDialog(id) {
+	var show = getNewsByID(id);
+	var page = $("#show_dialog_page");
+	var content = page.find('.dialog_content');
+	page.find('h1').html(show.show_name);
+	content.empty();
+	content.append('<div style="text-align: center"><img src="' + show.image_url + '"/></div>');
+	content.append('<h3>Episode ' + show.episode + '</h3>');
+	content.append('<p>' + show.info + '</p>');
+}
+
