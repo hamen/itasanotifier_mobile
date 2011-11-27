@@ -314,25 +314,29 @@ function getNextFavoriteSubs() {
 
 function getNews() {
 //	https://api.italiansubs.net/api/rest/news?page=1&apikey=632e846bc06f90a91dd9ff000b99ef87
-	var list = $('#news_list');
-	list.html("");
+	var news_img_url = [];
 	$.ajax({
 		type: "GET",
 		url: "https://api.italiansubs.net/api/rest/news?page=1",
 		dataType: "xml",
 		data: {apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+		async: false,
 		success: function(xml) {
 			$(xml).find('news > news').each(function() {
-				var name = $(this).find('show_name').text();
 				var image = $(this).find('image').text();
-				list.append($(document.createElement('li')).html(name + " " + image));
-				list.listview("destroy").listview();
+				var id = $(this).find('id').text();
+				news_img_url.push({ 'image_url' : image, 'id' : id });
 			});
-			if(window.localStorage.getItem("vibrate_checkbox") === 'true')
-				vibrate();
+			// if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+			// 	vibrate();
 		},
 		error: function() {
 			alert('Something was wrong');
 		}
+	});
+	$('#news_table tr').each(function(i) {
+		$(this).find('td:first span')
+			.html('<a href="http://www.italiansubs.net/index.php?option=com_news&Itemid=13&id=' + news_img_url[i].id
+				  +'>"<img src="' + news_img_url[i].image_url + '" /></a>');
 	});
 }
