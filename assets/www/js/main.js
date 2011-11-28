@@ -232,8 +232,8 @@ function getLatestFavoriteSubs() {
 					var name = nameNep.substr(0, nameNep.lastIndexOf(' '));
 					var episode = nameNep.substr(nameNep.lastIndexOf(' '));
 					var version = $(this).find('version').text();
-					var id = $(this).find('id').text();
-					var img = '<img src="http://www.italiansubs.net/varie/ico/' + name + '.png"/>';
+					var id = $(this).find('show_id').text();
+					var img = '<img src="https://api.italiansubs.net/api/rest/shows/' + id + '/folderThumb?apikey=632e846bc06f90a91dd9ff000b99ef87" />';
 					var h3 = '<h3>' + name + '</h3>';
 					var p = '<p>' + episode + '</p>';
 					list.append('<li>' + img + h3 + p + '</li>');
