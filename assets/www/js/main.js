@@ -82,6 +82,10 @@ function onDeviceReady() {
 	$('.thumb').live("click", function(){
 		showNewsDialog($(this).attr('show_id'));
 	});
+
+	$("#myitasaButton").click(function(){
+		$.mobile.changePage('#myitasa');
+	});
 }
 
 $(document).bind("mobileinit", function(){
@@ -232,9 +236,15 @@ function getLatestFavoriteSubs() {
 			dataType: "xml",
  			success: function(xml) {
 				$(xml).find('subtitle').each(function() {
-					var name = $(this).find('name').text();
+					var nameNep = $(this).find('name').text();
+					var name = nameNep.substr(0, nameNep.lastIndexOf(' '));
+					var episode = nameNep.substr(nameNep.lastIndexOf(' '));
 					var version = $(this).find('version').text();
-					list.append($(document.createElement('li')).html(name + " " + version));
+					var id = $(this).find('id').text();
+					var img = '<img src="http://www.italiansubs.net/varie/ico/' + name + '.png"/>';
+					var h3 = '<h3>' + name + '</h3>';
+					var p = '<p>' + episode + '</p>';
+					list.append('<li>' + img + h3 + p + '</li>');
 					list.listview("destroy").listview();
 				});
 				if(window.localStorage.getItem("vibrate_checkbox") === 'true')
@@ -294,7 +304,7 @@ function getNews() {
 		async: false,
 		success: function(xml) {
 			$(xml).find('news > news').each(function() {
-				var image = $(this).find('image').text();
+				var image = $(this).find('thumb').text();
 				var id = $(this).find('id').text();
 				news_img_url.push({ 'image_url' : image, 'id' : id });
 			});
@@ -305,9 +315,15 @@ function getNews() {
 			alert('Something was wrong');
 		}
 	});
+
+	var news_index = 0;
 	$('#news_table tr').each(function(i) {
 		$(this).find('td:first span')
-			.html('<a class="thumb" show_id="' + news_img_url[i].id +'" data-rel="dialog" data-transition="none" href="#show_dialog_page"><img src="'+ news_img_url[i].image_url + '" /></a>');
+			.html('<a class="thumb" show_id="' + news_img_url[news_index].id +'" data-rel="dialog" data-transition="none" href="#show_dialog_page"><img src="'+ news_img_url[news_index].image_url + '" /></a>');
+
+		$(this).find('td:last span')
+			.html('<a class="thumb" show_id="' + news_img_url[news_index+1].id +'" data-rel="dialog" data-transition="none" href="#show_dialog_page"><img src="'+ news_img_url[news_index+1].image_url + '" /></a>');
+		news_index += 2;
 	});
 }
 
@@ -353,3 +369,24 @@ function showNewsDialog(id) {
 	content.append('<p>' + show.info + '</p>');
 }
 
+function websiteLogin() {
+	$.ajax({
+		type: 'POST',
+		url: "http://www.italiansubs.net/index.php",
+		data: {
+			"username" : window.localStorage.getItem("username"),
+			"passwd" : window.localStorage.getItem("password"),
+			"remember" : "yes",
+			"Submit" : "Login",
+			"silent" : "true",
+			"task" : "login",
+			"option" : "com_user"
+		},
+		success: function(resp) {
+			console.log(resp);
+		},
+		error: function(resp) {
+			console.log(resp);
+		}
+	});
+}
