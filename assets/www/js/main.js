@@ -20,14 +20,6 @@ function onDeviceReady() {
 	document.addEventListener("menubutton", onMenuKeyDown, false);
 	document.addEventListener("backbutton", onBackKeyDown, true);
 	
-	$('#recentButton').click(function(){
-		getLatestSubs();
-	});
-
-	$('#refresh_button').click(function(){
-		getLatestSubs();
-	});
-	
 	$('#save_button').click(function(){
 		saveUserData();
 	});
