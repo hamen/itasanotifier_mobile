@@ -198,7 +198,10 @@ function getFavoriteList() {
  			success: function(xml) {
 				$(xml).find('show').each(function() {
 					var name = $(this).find('name').text();
-					list.append($(document.createElement('li')).html(name));
+					var id = $(this).find('id').text();
+					var img = '<img src="https://api.italiansubs.net/api/rest/shows/' + id + '/folderThumb?apikey=632e846bc06f90a91dd9ff000b99ef87" />';
+					var h3 = '<h3>' + name + '</h3>';
+					list.append('<li>' + img + h3 + '</li>');
 					list.listview("destroy").listview();
 				});
 				if(window.localStorage.getItem("vibrate_checkbox") === 'true')
@@ -268,7 +271,11 @@ function getNextFavoriteSubs() {
 				$(xml).find('episode').each(function() {
 					var name = $(this).find('show_name').text();
 					var date = $(this).find('date').text();
-					list.append($(document.createElement('li')).html(name + " " + date));
+					var id = $(this).find('show_id').text();
+					var img = '<img src="https://api.italiansubs.net/api/rest/shows/' + id + '/folderThumb?apikey=632e846bc06f90a91dd9ff000b99ef87" />';
+					var h3 = '<h3>' + name + '</h3>';
+					var p = '<p>' + date + '</p>';
+					list.append('<li>' + img + h3 + p + '</li>');
 					list.listview("destroy").listview();
 				});
 				if(window.localStorage.getItem("vibrate_checkbox") === 'true')
