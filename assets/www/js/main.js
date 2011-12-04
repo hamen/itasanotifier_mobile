@@ -19,6 +19,7 @@
 function onDeviceReady() {
 	document.addEventListener("menubutton", onMenuKeyDown, false);
 	document.addEventListener("backbutton", onBackKeyDown, true);
+	_admob.fetchAd(document.getElementById('admob_home'));
 	
 	$('#save_button').click(function(){
 		saveUserData();
@@ -34,20 +35,25 @@ function onDeviceReady() {
 
 	$('#favorite_button').click(function(){
 		getFavoriteList();
+		_admob.fetchAd(document.getElementById('admob_favorite'));
 	});
 
 	$('#latest_favorite_button').click(function(){
 		getLatestFavoriteSubs();
+		_admob.fetchAd(document.getElementById('admob_latest_favorite'));
 	});
 	$('#latest_refresh_button').click(function(){
 		getLatestFavoriteSubs();
+		_admob.fetchAd(document.getElementById('admob_latest_favorite'));
 	});
 
 	$('#next_favorite_button').click(function(){
+		_admob.fetchAd(document.getElementById('admob_next_favorite'));
 		getNextFavoriteSubs();
 	});
 	$('#next_refresh_button').click(function(){
 		getNextFavoriteSubs();
+		_admob.fetchAd(document.getElementById('admob_next_favorite'));
 	});
 
 	$('#exit_button').click(function(){
@@ -64,11 +70,13 @@ function onDeviceReady() {
 	});
 
 	$('#newsButton').click(function(){
+		_admob.fetchAd(document.getElementById('admob_news'));
 		getNews();
 	});
 
 	$('#news_refresh_button').click(function(){
 		getNews();
+		_admob.fetchAd(document.getElementById('admob_news'));
 	});
 
 	$('.thumb').live("click", function(){
@@ -77,6 +85,7 @@ function onDeviceReady() {
 
 	$("#myitasaButton").click(function(){
 		$.mobile.changePage('#myitasa');
+		_admob.fetchAd(document.getElementById('admob_myitasa'));
 	});
 }
 

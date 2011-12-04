@@ -30,14 +30,28 @@
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.0.min.js"></script>
 	<script type="text/javascript">
+	  var admob_vars = {
+	  pubid: 'a14edb91a32de44',
+	  bgcolor: '4980AF',
+	  text: 'ffffff', 
+	  test: false,
+	  manual_mode: true
+	  };
+	</script>
+	<script type="text/javascript" src="http://mmv.admob.com/static/iphone/iadmob.js"></script>
+	<script type="text/javascript">
 	  $( function() {
 	  loadUserSavedData();
 	  
 	  document.addEventListener("deviceready", onDeviceReady, false);
 	  });
-	</script>  
+	</script>
   </head>
   <body>
+	<div class="tags" style="display : none;">
+	  itasa italiasubs sottotitoli serie tv dexter smallville anime giapponesi
+	  dronix telefilm walking dead myitasa
+	</div>
 	<!-- HOME PAGE -->
 	<div data-role="page" id="home" data-theme="b"> 
 	  <div data-role="header" data-theme="b">
@@ -50,7 +64,12 @@
 		<!--<p><a id="series_list_button" href="#series_list_page" data-role="button">Show List</a></p> -->
 		<p><a href="#about" data-role="button">Informazioni</a></p>
 		<p><a id="exit_button" href="#" data-role="button">Esci</a></p>
-	  </div>  
+	  </div>
+	  <div id="admob_home" data-role="footer" data-theme="b" style="text-align: center;">
+		<a href="http://flattr.com/thing/446767/ItasaNotifier-Mobile" target="_blank">
+		  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
+		</a>
+	  </div>
     </div>
 	<!-- MYITASA PAGE -->
 	<div data-role="page" id="myitasa" class='swipehome' data-theme="b">
@@ -66,7 +85,9 @@
 		<p><a id="next_favorite_button" href="#" data-role="button">Prossimi episodi</a></p>
 		<p><a id="forum_button" href="http://www.italiansubs.net/forum/" data-role="button">Forum</a></p>
 		<p><a id="blog_button" href="http://blog.italiansubs.net/" data-role="button">Blog</a></p>
-	  </div>  
+	  </div>
+	  <div id="admob_myitasa" data-role="footer" data-theme="b">
+	  </div>
 	</div>
 	<!-- SETTINGS PAGE -->
 	<div data-role="page" id="settings" class="swipehome" data-theme="b"> 
@@ -109,8 +130,8 @@
 		  per <a href="http://dronix.org">DroniX.org</a>
 		  e <a href="http://italiansubs.net">ItalianSubs.net</a>
 		</p>
-		<p>Versione: 1.3.1</p>
-		<p>Rilascio: 21 Nov 2011</p>
+		<p>Versione: 1.5a1</p>
+		<p>Rilascio: 4 Dic 2011</p>
 	  </div>
 	</div>
 	<!-- TVSERIES LIST PAGE -->
@@ -133,6 +154,8 @@
 		<a href="#home" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right"></a>
 	  </div>
 	  <div data-role="content">
+		<div id="admob_favorite">
+		</div>
 		<ul data-role="listview" id="favorite_list"></ul>
 	  </div>
 	  <div data-role="footer" data-theme="b">
@@ -147,6 +170,8 @@
 		<a href="#home" data-role="button" data-icon="home" data-iconpos="notext"></a>
 	  </div>
 	  <div data-role="content">
+		<div id="admob_latest_favorite">
+		</div>
 		<ul data-role="listview" id="latest_favorite_list" data-theme="b"></ul>
 	  </div>
 	  <div data-role="footer" data-theme="b">
@@ -161,6 +186,8 @@
 		<a href="#home" data-role="button" data-icon="home" data-iconpos="notext"></a>
 	  </div>
 	  <div data-role="content">
+		<div id="admob_next_favorite">
+		</div>
 		<ul data-role="listview" id="next_favorite_list"></ul>
 	  </div>
 	  <div data-role="footer" data-theme="b">
@@ -174,7 +201,9 @@
 		<a id="news_refresh_button" href="#" data-role="button" data-icon="refresh" data-iconpos="notext"></a>
 		<a href="#home" data-role="button" data-icon="home" data-iconpos="notext"></a> 
 	  </div>
-	  <div data-role="content"> 
+	  <div data-role="content">
+		<div id="admob_news">
+		</div>
 		<ul data-role="listview" id="news_list">
 		</ul>
         <table id="news_table" style="margin-left:auto;
