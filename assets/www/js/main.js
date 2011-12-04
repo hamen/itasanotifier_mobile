@@ -70,7 +70,6 @@ function onDeviceReady() {
 	});
 
 	$('#newsButton').click(function(){
-		_admob.fetchAd(document.getElementById('admob_news'));
 		getNews();
 	});
 
