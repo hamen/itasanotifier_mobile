@@ -170,6 +170,7 @@ function login(show_alert) {
 					authcode = $(this).find('authcode').text();
 					if(authcode !== "" && authcode !== undefined && show_alert) {
 						alert("Login effettuato con successo");
+						$.mobile.changePage("#home");
 					}
 				});
 			},
