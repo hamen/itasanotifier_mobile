@@ -86,6 +86,10 @@ function onDeviceReady() {
 		$.mobile.changePage('#myitasa');
 		_admob.fetchAd(document.getElementById('admob_myitasa'));
 	});
+
+	$('.favorite_li_item').live("click", function(){
+		showShowDialog($(this).attr('show_id'));
+	});
 }
 
 $(document).bind("mobileinit", function(){
@@ -210,8 +214,9 @@ function getFavoriteList() {
 					var id = $(this).find('id').text();
 					var img = '<img src="https://api.italiansubs.net/api/rest/shows/' + id + '/folderThumb?apikey=632e846bc06f90a91dd9ff000b99ef87" />';
 					var h3 = '<h3>' + name + '</h3>';
-					list.append('<li>' + img + h3 + '</li>');
+					list.append('<li show_id="' + id + '" class="favorite_li_item">' + img + h3 + '</li>');
 					list.listview("destroy").listview();
+					//console.log(name + " " + id + " " + img);
 				});
 				if(window.localStorage.getItem("vibrate_checkbox") === 'true')
 					vibrate();
@@ -327,10 +332,10 @@ function getNews() {
 	var news_index = 0;
 	$('#news_table tr').each(function(i) {
 		$(this).find('td:first span')
-			.html('<a class="thumb" show_id="' + news_img_url[news_index].id +'" data-rel="dialog" data-transition="none" href="#show_dialog_page"><img src="'+ news_img_url[news_index].image_url + '" /></a>');
+			.html('<a class="thumb" show_id="' + news_img_url[news_index].id +'"><img src="'+ news_img_url[news_index].image_url + '" /></a>');
 
 		$(this).find('td:last span')
-			.html('<a class="thumb" show_id="' + news_img_url[news_index+1].id +'" data-rel="dialog" data-transition="none" href="#show_dialog_page"><img src="'+ news_img_url[news_index+1].image_url + '" /></a>');
+			.html('<a class="thumb" show_id="' + news_img_url[news_index+1].id +'"><img src="'+ news_img_url[news_index+1].image_url + '" /></a>');
 		news_index += 2;
 	});
 }
@@ -375,6 +380,7 @@ function showNewsDialog(id) {
 	content.append('<div style="text-align: center"><img src="' + show.image_url + '"/></div>');
 	content.append('<h3>Episode ' + show.episode + '</h3>');
 	content.append('<p>' + show.info + '</p>');
+	$.mobile.changePage(page, {transition: 'none', role: 'dialog'});
 }
 
 function websiteLogin() {
@@ -397,4 +403,49 @@ function websiteLogin() {
 			console.log(resp);
 		}
 	});
+}
+
+function getShowByID(id) {
+	console.log('getShowByID: ' + id);
+	var show;
+	$.ajax({
+		type: "GET",
+		url: "https://api.italiansubs.net/api/rest/shows/" + id,
+		dataType: "xml",
+		data: {apikey: "632e846bc06f90a91dd9ff000b99ef87"},
+		async: false,
+		success: function(xml) {
+			$(xml).find('show').each(function() {
+				var name = $(this).find('name:first').text();
+				var plot = $(this).find('plot').text();
+				var thumb = $(this).find('folder_thumb').text();
+				var fans = $(this).find('fans').text();
+				show = {
+					'name' : name,
+					'plot' : plot,
+					'thumb' : thumb,
+					'fans' : fans
+				};
+			});
+			// if(window.localStorage.getItem("vibrate_checkbox") === 'true')
+			// 	vibrate();
+		},
+		error: function() {
+			alert('Something was wrong');
+		}
+	});
+	return show;
+}
+
+function showShowDialog(id) {
+	console.log('showDialog: ' + id);
+	var show = getShowByID(id);
+	var page = $("#show_dialog_page");
+	var content = page.find('.dialog_content');
+	page.find('h1').html(show.name);
+	content.empty();
+	content.append('<div style="text-align: center"><img src="' + show.thumb + '"/></div>');
+	content.append('<h3>Fans: ' + show.fans + '</h3>');
+	content.append('<p>' + show.plot + '</p>');
+	$.mobile.changePage(page, {transition: 'none', role: 'dialog'});
 }
